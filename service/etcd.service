@@ -1,0 +1,19 @@
+[Unit]
+Description=EtcdService
+
+[Service]
+# useradd -r -M -s /bin/false etcd-runner
+# groupadd certs
+# usermod -a -G certs etcd-runner
+# chown -R root.certs /certs
+User=etcd-runner
+Group=etcd-runner
+
+WorkingDirectory=/mnt/etcd
+
+Restart=on-failure
+ExecStart=/mnt/etcd/bin/etcd.service
+
+[Install]
+WantedBy=multi-user.target
+
