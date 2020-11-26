@@ -5,14 +5,14 @@ Description=EtcdService
 # useradd -r -M -s /bin/false etcd-runner
 # groupadd certs
 # usermod -a -G certs etcd-runner
-# chown -R root.certs /certs
+# chown -R root.certs /mnt/etcd
 User=etcd-runner
 Group=etcd-runner
 
 WorkingDirectory=/mnt/etcd
 
 Restart=on-failure
-ExecStart=/mnt/etcd/bin/etcd.service
+ExecStart=/mnt/etcd/bin/etcd --name montco --data-dir /mnt/etcd/montco --cert-file=/mnt/etcd/certs/server.crt --key-file=/mnt/etcd/certs/server.key --advertise-client-urls=https://0.0.0.0:2379 --listen-client-urls=https://0.0.0.0:2379
 
 [Install]
 WantedBy=multi-user.target
